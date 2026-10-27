@@ -22,6 +22,16 @@ Khi hoàn thành bất kỳ tính năng (`feat`), sửa lỗi (`fix`), tái cấ
 
 ## Nhật Ký Thay Đổi
 
+### [2026-10-27 20:38] — feat(auth): integrate Google Sign-In with Firebase Authentication
+- **Tác vụ**: Tích hợp Firebase Auth SDK v10; bổ sung nút "Đăng nhập Google" với logo Google sắc nét; tự động hiển thị Avatar thật, Tên và Email thật của người dùng khi đăng nhập; thêm nút Đăng xuất và hệ thống thông báo Toast thân thiện.
+- **Danh sách file thay đổi**:
+  - `js/config.js` (Thêm thông số cấu hình FIREBASE_CONFIG chính thức)
+  - `js/api.js` (Thêm AuthService quản lý signInWithGoogle, signOut, onAuthStateChanged)
+  - `index.html` (Thêm nút đăng nhập, avatar ảnh thật, nhúng Firebase SDK và Toast container)
+  - `css/style.css` (Style cho nút Google, Avatar, nút Logout và Toast notification)
+  - `js/app.js` (Kết nối sự kiện đăng nhập/đăng xuất và cập nhật giao diện thời gian thực)
+- **Ảnh hưởng**: Người dùng có thể đăng nhập bằng tài khoản Google thật, sẵn sàng để đồng bộ câu hỏi và tài liệu sau này.
+
 ### [2026-10-27 18:30] — fix(ui): fix sidebar collapse animation anchoring to the left edge
 - **Tác vụ**: Cố định vị trí bên trái của toàn bộ sidebar (Avatar, Icon nút bấm, Nút MENU). Khi bấm thu gọn, chỉ có mép phải co lại từ 240px về 72px; loại bỏ hoàn toàn hiện tượng căn giữa (center) hoặc giật vị trí icon.
 - **Danh sách file thay đổi**:

@@ -14,11 +14,15 @@ const APP_CONFIG = {
   // Trạng thái thu gọn mặc định của Sidebar
   SIDEBAR_DEFAULT_EXPANDED: true,
   
-  // Dữ liệu người dùng mẫu
-  USER: {
-    name: 'Giáo viên',
-    email: 'abc123@gmail.com',
-    role: 'Teacher'
+  // Cấu hình Firebase Authentication
+  FIREBASE_CONFIG: {
+    apiKey: "AIzaSyDcOOQixhq7pEWVZ7roEF63ykRxzS7miQ4",
+    authDomain: "eduplay-bede5.firebaseapp.com",
+    projectId: "eduplay-bede5",
+    storageBucket: "eduplay-bede5.firebasestorage.app",
+    messagingSenderId: "215449941224",
+    appId: "1:215449941224:web:0f0b6ff61e3f7ca617455d",
+    measurementId: "G-HB0W9NQ38L"
   },
 
   // Bộ đề mẫu thử nghiệm nhanh (Quick Presets)
