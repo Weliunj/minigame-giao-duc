@@ -30,6 +30,16 @@ const AuthService = {
 
       this.auth = firebase.auth();
       this.isInitialized = true;
+      
+      // Kiểm tra kết quả nếu người dùng đăng nhập bằng phương thức Redirect
+      this.auth.getRedirectResult().then((result) => {
+        if (result && result.user) {
+          console.log('[Auth] Đăng nhập Redirect thành công:', result.user.email);
+        }
+      }).catch((error) => {
+        console.error('[Auth Redirect Result Error]:', error);
+      });
+
       console.log('[Auth] Firebase Auth đã sẵn sàng.');
       return true;
     } catch (error) {
@@ -48,7 +58,7 @@ const AuthService = {
   },
 
   /**
-   * Đăng nhập bằng tài khoản Google (Popup)
+   * Đăng nhập bằng tài khoản Google (Hỗ trợ Popup và tự động chuyển sang Redirect nếu bị chặn)
    * @returns {Promise<Object>} Thông tin tài khoản người dùng
    */
   async signInWithGoogle() {
@@ -67,15 +77,33 @@ const AuthService = {
       };
     } catch (error) {
       console.error('[Google Sign-in Error]:', error);
-      // Xử lý các mã lỗi phổ biến của Firebase
-      let message = 'Đăng nhập không thành công. Vui lòng thử lại!';
-      if (error.code === 'auth/popup-closed-by-user') {
-        message = 'Bạn vừa đóng cửa sổ đăng nhập.';
+      
+      // Xử lý chi tiết các mã lỗi Firebase thường gặp
+      let message = `Lỗi: ${error.code || 'unknown'} - ${error.message}`;
+      
+      if (error.code === 'auth/operation-not-allowed') {
+        message = 'Google Sign-in chưa được BẬT trong Firebase Console (mục Authentication > Sign-in method).';
+      } else if (error.code === 'auth/popup-blocked') {
+        message = 'Trình duyệt đang chặn cửa sổ Popup. Đang chuyển hướng sang trang đăng nhập...';
+        // Tự động chuyển hướng (Redirect) nếu trình duyệt chặn Popup
+        try {
+          const provider = new firebase.auth.GoogleAuthProvider();
+          await this.auth.signInWithRedirect(provider);
+          return { success: false, redirecting: true, error: message };
+        } catch (redirectErr) {
+          message = 'Không thể mở trang đăng nhập: ' + redirectErr.message;
+        }
+      } else if (error.code === 'auth/popup-closed-by-user') {
+        message = 'Bạn vừa đóng cửa sổ đăng nhập Google.';
       } else if (error.code === 'auth/unauthorized-domain') {
-        message = 'Tên miền chưa được cấp phép trong Firebase Console.';
+        message = 'Tên miền web chưa được cấp phép trong mục Authorized domains của Firebase Console.';
+      } else if (error.code === 'auth/cancelled-popup-request') {
+        message = 'Yêu cầu đăng nhập trước đó đã bị hủy.';
       }
+
       return {
         success: false,
+        code: error.code,
         error: message
       };
     }
