@@ -1,0 +1,43 @@
+# ====================================================================
+# Git Ignore Rules - EduPlay AI
+# Tuân thủ nguyên tắc bảo mật: Không đẩy API Keys & Dữ liệu nhạy cảm
+# ====================================================================
+
+# 1. Khóa bí mật & Biến môi trường (Credentials & Environment Files)
+.env
+.env.local
+.env.*.local
+*.env
+api-keys.json
+credentials.json
+secrets.json
+
+# 2. Dữ liệu học sinh & Bài kiểm tra nhạy cảm (Local Student Data)
+/data/local/
+*.student-roster.json
+
+# 3. Quản lý thư viện phụ thuộc (Node & Dependencies - phòng khi mở rộng)
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 4. Tệp tin tạm thời & Cache của IDE / Hệ điều hành
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.temp
+
+# 5. Cấu hình IDE cá nhân
+.idea/
+*.sublime-project
+*.sublime-workspace
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# 6. Logs & Lịch sử chạy thử
+logs/
+*.log

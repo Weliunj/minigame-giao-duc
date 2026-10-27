@@ -9,6 +9,8 @@ AI Agent bắt buộc phải tuân thủ nghiêm ngặt cây thư mục chuẩn 
 
 ```text
 Documents/Web/
+├── .gitignore              # [BẢO MẬT] Chặn commit API keys, file .env, dữ liệu nhạy cảm
+├── .env.example            # [BẢO MẬT] File mẫu cấu hình biến môi trường
 ├── GEMINI.md               # [BẮT BUỘC] Bộ quy tắc cốt lõi (Workspace Rules)
 ├── README.md               # Tài liệu tổng quan dự án (Mục đích, tính năng, hướng dẫn)
 ├── docs/                   # Tài liệu nghiệp vụ & kịch bản chi tiết
@@ -73,3 +75,31 @@ Documents/Web/
 ## 6. QUY TẮC THỰC THI & KIỂM TRA TRƯỚC KHI BÀN GIAO
 1. Mỗi file JavaScript khi tạo hoặc cập nhật đều phải có phần ghi chú (Comment Header) ở đầu file giải thích rõ nhiệm vụ của file.
 2. Kiểm tra kỹ đường dẫn nhúng file (`href="css/style.css"`, `<script src="js/config.js">`) để đảm bảo chạy mượt trên mọi môi trường cục bộ (Local / Live Server) mà không phát sinh lỗi 404.
+
+---
+
+## 7. QUẢN LÝ BẢO MẬT, API KEYS & AN TOÀN DỮ LIỆU HỌC ĐƯỜNG (SECURITY & PRIVACY)
+1. **Bảo vệ API Keys & Thông tin nhạy cảm:**
+   - **Tuyệt đối cấm commit API Keys:** Không được ghi cứng (hardcode) bất kỳ Private Key, Token hoặc mật khẩu nào vào các file frontend (`js/`, `index.html`) được đẩy lên Git.
+   - Bắt buộc duy trì file `.gitignore` để chặn toàn bộ các file nhạy cảm: `.env`, `*.secret`, `api-keys.json`, dữ liệu cá nhân học sinh.
+   - Luôn cung cấp file mẫu `.env.example` để hướng dẫn người dùng cấu hình môi trường mà không làm rò rỉ khóa thực tế.
+2. **Quyền riêng tư học sinh (Student Data Privacy):**
+   - Danh sách lớp học, họ tên, điểm số học sinh phải được lưu trữ cục bộ (`localStorage` của trình duyệt hoặc file bộ nhớ tạm của giáo viên), TUYỆT ĐỐI không gửi kèm thông tin định danh cá nhân của học sinh trong các câu prompt gửi lên server AI từ xa.
+3. **Chính sách kho lưu trữ (Repository Privacy):**
+   - Nếu dự án có chứa thông tin trường lớp thực tế hoặc giáo án nội bộ chưa công bố: **Bắt buộc cài đặt Repository ở chế độ Private**.
+   - Nếu công khai mã nguồn (Public Repo): Chỉ sử dụng các API miễn phí không cần key (như Pollinations AI) hoặc cơ chế BYOK (Bring Your Own Key - giáo viên tự nhập key cá nhân vào cài đặt trình duyệt để lưu tại LocalStorage máy mình).
+
+---
+
+## 8. QUY CHUẨN THIẾT KẾ ĐA THIẾT BỊ (RESPONSIVE & ADAPTIVE UX)
+1. **Kiến trúc Responsive một Codebase duy nhất:**
+   - Sử dụng CSS Media Queries (`@media`) để tự động thích ứng với mọi kích thước màn hình mà không cần duy trì 2 trang web riêng biệt.
+2. **Tiêu chuẩn Breakpoints:**
+   - **Máy tính / Màn hình máy chiếu ($\ge 1024px$):** Bố cục đa cột (Split-screen), Vòng quay Canvas to rõ ($380px - 450px$), phông chữ câu hỏi lớn ($1.3rem - 1.5rem$) đảm bảo học sinh ngồi cách 5 - 7 mét vẫn đọc rõ.
+   - **Máy tính bảng (Tablet $768px - 1023px$):** Bố cục co giãn 2 cột linh hoạt.
+   - **Điện thoại di động ($< 768px$):** Chuyển sang bố cục 1 cột (Single Column / Stacked), menu điều hướng chuyển xuống sát đáy (Bottom Navigation) thuận tiện cho ngón tay cái.
+3. **Tiêu chuẩn tương tác cảm ứng (Touch Target):**
+   - Mọi nút bấm, ô lựa chọn đáp án trên màn hình cảm ứng phải đạt kích thước tối thiểu **$48px \times 48px$** (chuẩn W3C Web Accessibility) với khoảng cách an toàn tối thiểu $8px$ để chống bấm nhầm.
+   - Nhận diện thiết bị cảm ứng thông qua CSS `(pointer: coarse)` để tự động tăng kích thước vùng bấm.
+
+

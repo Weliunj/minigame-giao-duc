@@ -36,6 +36,9 @@ Dự án tuân thủ nghiêm ngặt **Bộ Quy Tắc Phát Triển Antigravity R
 
 ```text
 Documents/Web/
+├── .gitignore              # [BẢO MẬT] Chặn lộ API keys, file môi trường, dữ liệu nhạy cảm
+├── .env.example            # [BẢO MẬT] File mẫu cấu hình biến môi trường
+├── GEMINI.md               # [BẮT BUỘC] Bộ quy tắc Workspace Rules của Antigravity
 ├── README.md               # Tài liệu tổng quan dự án
 ├── docs/                   # Tài liệu chi tiết các phân hệ
 │   ├── teacher-flow.md     # Quy trình thao tác của giáo viên

@@ -62,3 +62,24 @@ graph TD
 
 - **Lưu bộ đề:** Bấm nút **"Xuất Dữ Liệu (Export JSON)"** để tải về máy tính file bài giảng dạng `.json`.
 - **Nạp lại bộ đề cũ:** Bấm **"Nhập Dữ Liệu (Import JSON)"** để mở lại bộ câu hỏi đã chuẩn bị từ trước mà không cần nhập lại.
+
+---
+
+## 📱 4. Quy Trình Trải Nghiệm Đa Thiết Bị (Multi-Device Workflow)
+
+Hệ thống tự động thích ứng với 2 kịch bản sử dụng thực tế của giáo viên:
+
+### Kịch bản A: Trình chiếu trên Máy Tính / Máy Chiếu / Smart TV (Màn hình lớn)
+1. Giáo viên mở ứng dụng trên máy tính kết nối máy chiếu lớp học.
+2. Bật chế độ **Toàn Màn Hình (Fullscreen)** để loại bỏ các thanh công cụ trình duyệt thừa.
+3. Giao diện hiển thị chế độ song song (Split Screen):
+   - Bên trái: Vòng quay may mắn kích thước lớn ($380px - 450px$) để học sinh ngồi xa vẫn thấy kim chỉ quay.
+   - Bên phải: Câu hỏi trắc nghiệm kèm ảnh minh họa AI độ nét cao, chữ phóng to $1.4rem$.
+4. Giáo viên sử dụng phím tắt nhanh (`1, 2, 3, 4` hoặc `A, B, C, D`) trên bàn phím để chọn đáp án thay vì phải dùng chuột.
+
+### Kịch bản B: Điều khiển trên Điện Thoại / Máy Tính Bảng Cảm Ứng (Cầm tay)
+1. Giáo viên vừa di chuyển trong lớp vừa cầm điện thoại mở bài giảng.
+2. Giao diện tự động thu gọn về 1 cột (Single Column Layout) với thanh menu điều hướng chuyển xuống đáy màn hình (Bottom Navigation Bar).
+3. Mọi nút bấm (Quay, Chọn đáp án, Cộng điểm tổ) tự động phóng to tối thiểu $48px \times 48px$ để giáo viên bấm một tay bằng ngón cái mà không sợ trượt.
+4. Khi cho học sinh lên chơi trò "Ghép Tranh 3D", học sinh chạm ngón tay trực tiếp vào màn hình cảm ứng để lật thẻ mượt mà.
+
